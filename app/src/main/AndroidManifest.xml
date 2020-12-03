@@ -31,6 +31,9 @@
         <activity
             android:name=".LoginActivity"
             android:parentActivityName=".StartActivity" />
+        <activity
+            android:name=".ResetPasswordActivity"
+            android:parentActivityName=".LoginActivity" />
     </application>
 
 </manifest>
