@@ -37,6 +37,29 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
+        <TextView
+            android:id="@+id/show_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="77dp"
+            android:layout_marginRight="77dp"
+            android:padding="8dp"
+            android:text="@string/date" />
+
+<!--        TODO get current date on top screen-->
+<!--        <TextView
+            android:id="@+id/current_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="130dp"
+            android:layout_marginRight="130dp"
+            android:text="TextView" />-->
+
     </RelativeLayout>
 
 </RelativeLayout>

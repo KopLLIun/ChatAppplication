@@ -1,5 +1,6 @@
 package com.example.messangerapp.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,9 @@ import com.example.messangerapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
@@ -51,9 +55,20 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull MessageAdapter.ViewHolder holder, int position) {
 
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd:MM");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy (HH:mm:ss)");
         Chat chat = mChat.get(position);
 
         holder.show_message.setText(chat.getMessage());
+        holder.show_date.setText(chat.getDate());
+        try {
+            holder.current_date.setText(simpleDateFormat.format(new Date()));
+            //TODO get current date
+            if (simpleDateFormat.parse(chat.getDate()).before(new Date())) {
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         if (imageurl.equals("default")){
             holder.profile_image.setImageResource(R.mipmap.ic_launcher);
@@ -81,6 +96,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     public  class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView show_message;
+        public TextView show_date;
+        public TextView current_date;
         public ImageView profile_image;
         public TextView txt_seen;
 
@@ -88,6 +105,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             super(itemView);
             //TODO
             show_message = itemView.findViewById(R.id.show_message);
+            show_date = itemView.findViewById(R.id.show_date);
+            current_date = itemView.findViewById(R.id.current_date);
             profile_image = itemView.findViewById(R.id.profile_image);
             txt_seen = itemView.findViewById(R.id.txt_seen);
         }

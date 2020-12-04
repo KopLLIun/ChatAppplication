@@ -31,5 +31,23 @@
         android:visibility="gone"
         android:layout_below="@id/show_message"/>
 
+    <TextView
+        android:id="@+id/show_date"
+        android:padding="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/date"
+        android:layout_marginTop="35dp"/>
+
+<!--    <TextView
+        android:id="@+id/current_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="159dp"
+        android:layout_marginLeft="159dp"
+        android:text="TextView" />-->
+
 
 </RelativeLayout>

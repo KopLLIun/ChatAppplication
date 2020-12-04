@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -29,7 +30,9 @@ import com.google.firebase.database.ValueEventListener;
 //import com.example.messangerapp.Notifications.Token;
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -46,6 +49,7 @@ public class MessageActivity extends AppCompatActivity {
 
     ImageButton btn_send;
     EditText text_send;
+    TextView text_date;
 
     MessageAdapter messageAdapter;
     List<Chat> mchat;
@@ -57,6 +61,9 @@ public class MessageActivity extends AppCompatActivity {
     ValueEventListener seenListener;
 
     String userid;
+
+    @SuppressLint("SimpleDateFormat")
+    final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy (HH:mm:ss)");
 
 //    APIService apiService;
 
@@ -91,6 +98,7 @@ public class MessageActivity extends AppCompatActivity {
         username = findViewById(R.id.username);
         btn_send = findViewById(R.id.btn_send);
         text_send = findViewById(R.id.text_send);
+        text_date = findViewById(R.id.show_date);
 
         intent = getIntent();
         userid = intent.getStringExtra("userId");
@@ -168,7 +176,7 @@ public class MessageActivity extends AppCompatActivity {
         hashMap.put("receiver", receiver);
         hashMap.put("message", message);
         hashMap.put("issSen", false);
-
+        hashMap.put("date", simpleDateFormat.format(new Date()));
         reference.child("Chats").push().setValue(hashMap);
 
 
