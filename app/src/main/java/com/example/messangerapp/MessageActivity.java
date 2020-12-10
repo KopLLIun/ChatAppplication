@@ -16,15 +16,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.messangerapp.fragments.ApiService;
 import com.example.messangerapp.model.Chat;
 import com.example.messangerapp.model.User;
 import com.example.messangerapp.adapter.MessageAdapter;
+import com.example.messangerapp.notifications.Client;
+import com.example.messangerapp.notifications.Data;
+import com.example.messangerapp.notifications.MyResponse;
+import com.example.messangerapp.notifications.Sender;
+import com.example.messangerapp.notifications.Token;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 //import com.example.messangerapp.Notifications.Token;
 
@@ -35,6 +42,9 @@ import java.util.List;
 
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MessageActivity extends AppCompatActivity {
 
@@ -58,7 +68,7 @@ public class MessageActivity extends AppCompatActivity {
 
     String userid;
 
-//    APIService apiService;
+    ApiService apiService;
 
     boolean notify = false;
 
@@ -79,7 +89,7 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
 
-//        apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
+        apiService = Client.getClient("https://fcm.googleapis.com/").create(ApiService.class);
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -205,7 +215,7 @@ public class MessageActivity extends AppCompatActivity {
                 User user = dataSnapshot.getValue(User.class);
                 if (notify) {
                     //TODO
-//                    sendNotifiaction(receiver, user.getUsername(), msg);
+                    sendNotifiaction(receiver, user.getUsername(), msg);
                 }
                 notify = false;
             }
@@ -218,7 +228,7 @@ public class MessageActivity extends AppCompatActivity {
     }
 
     //TODO
-/*    private void sendNotifiaction(String receiver, final String username, final String message){
+    private void sendNotifiaction(String receiver, final String username, final String message){
         DatabaseReference tokens = FirebaseDatabase.getInstance().getReference("Tokens");
         Query query = tokens.orderByKey().equalTo(receiver);
         query.addValueEventListener(new ValueEventListener() {
@@ -255,7 +265,7 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         });
-    }*/
+    }
 
     private void readMesagges(final String myid, final String userid, final String imageurl){
         mchat = new ArrayList<>();
